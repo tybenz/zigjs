@@ -1,0 +1,22 @@
+{
+  "name": "zigjs",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "*.md",
+    "Gruntfile.js",
+    "package.json",
+    "bower.json"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "requirejs": "~2.1.8"
+  },
+  "keywords": [
+    "game",
+    "game engine",
+    "platformer",
+    "platform"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "zigjs",
+  "title": "zigjs",
+  "description": "2D platform game engine",
+  "version": "0.0.1",
+  "author": {
+    "name": "Tyler Benziger",
+    "url": "http://tybenz.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tybenz/zigjs.git"
+  },
+  "keywords": [
+    "game",
+    "game engine",
+    "platformer",
+    "platform"
+  ]
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.3",
+    "requirejs": "~2.1.9",
+    "which": "~1.0.5"
+  },
+  "scripts": {
+    "install": "node build/bower-install"
+  }
+}
