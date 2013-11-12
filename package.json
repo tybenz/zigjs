@@ -16,8 +16,7 @@
     "game engine",
     "platformer",
     "platform"
-  ]
-  "dependencies": {},
+  ],
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.7",
