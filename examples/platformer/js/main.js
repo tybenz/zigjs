@@ -5,7 +5,10 @@ require.config({
         'vector': '../../../lib/vector',
         'sprite': '../../../lib/sprite',
         'entity': '../../../lib/entity',
-        'animation': '../../../lib/animation'
+        'animation': '../../../lib/animation',
+        'image-loader': '../../../lib/image-loader',
+        'game-manager': '../../../lib/game-manager',
+        'jquery': '../../../bower_components/jquery/jquery'
     }
 });
 
@@ -13,35 +16,37 @@ require([
     'entity',
     'hero',
     'land',
-    'animation'
-], function ( Entity, Hero, Land, Animation ) {
-    var img = new Image();
+    'animation',
+    'image-loader',
+    'sprite',
+    'game-manager'
+], function ( Entity, Hero, Land, Animation, ImageLoader, Sprite, GameManager ) {
+    var flyPath = 'img/fly.png',
+        walkerPath = 'img/walker-23.png';
 
-    img.onload = function() {
-        console.log('test');
-        var hero = new Hero( 0, 0 );
+    var MyGame = GameManager.extend({
+        gameReady: function () {
+            var fly = new Hero( 100, 0 ),
+                walker = new Hero( 0, 0 ),
+                flySprite = new Sprite( flyPath ),
+                walkerSprite = new Sprite( walkerPath ),
+                canvas = document.createElement( 'canvas' ),
+                ctx = canvas.getContext( '2d' );
 
-        hero.animation = new Animation( img, 2, 69, 32, 200 );
+            document.body.appendChild( canvas );
 
-        var canvas = document.createElement( 'canvas' );
-        document.body.appendChild( canvas );
-        document.body.style.backgroundColor = '#f9f9f9';
-        canvas.width = 1500;
-        canvas.height = 250;
-        var ctx = canvas.getContext( '2d' );
+            walker.setAnimation( new Animation( walkerSprite, 8, walker.width, walker.height, 100 ) );
+            fly.setAnimation( new Animation( flySprite, 2, 69, 32, 200 ) );
 
-        var x = 1200;
-        var y = 200;
-        var loop = function() {
-            x -= 2;
-            y-=0.2;
-            hero.animation.drawCurrent( ctx, x, y );
+            canvas.width = 1500;
+            canvas.height = 200;
 
-            requestAnimationFrame( loop );
-        };
+            this.setContext( ctx );
+            this.loadLevel( { entities: [ fly, walker ] } );
 
-        requestAnimationFrame( loop );
-    };
+            this.start();
+        }
+    });
 
-    img.src = 'img/fly.png';
+    var game = new MyGame( [ flyPath, walkerPath ] );
 });

@@ -1,6 +1,4 @@
-define([
-    'entity'
-], function ( Entity ) {
+define( 'land', [ 'entity' ], function ( Entity ) {
     return Entity.extend({
         width: 12,
         height: 12

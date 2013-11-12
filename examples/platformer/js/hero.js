@@ -1,9 +1,6 @@
-define([
-    'animation',
-    'entity'
-], function ( Animation, Entity ) {
+define( 'hero', [ 'animation', 'entity' ], function ( Animation, Entity ) {
     return Entity.extend({
-        width: 73,
-        height: 95
+        width: 72,
+        height: 93
     });
 });
