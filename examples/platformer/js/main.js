@@ -22,7 +22,7 @@ require([
     'game-manager'
 ], function ( Entity, Hero, Land, Animation, ImageLoader, Sprite, GameManager ) {
     var flyPath = 'img/fly.png',
-        walkerPath = 'img/walker-23.png';
+        walkerPath = 'img/walker.png';
 
     var MyGame = GameManager.extend({
         gameReady: function () {
