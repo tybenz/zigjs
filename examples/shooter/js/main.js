@@ -24,11 +24,12 @@ require([
     var MyGame = GameManager.extend({
         gameReady: function ( game ) {
             var hero = new Hero( 0, 480 ),
-                canvas = document.createElement( 'canvas' ),
-                ctx = canvas.getContext( '2d' );
+                canvas = document.createElement( 'canvas' );
 
             canvas.width = 1000;
             canvas.height = 512;
+
+            var ctx = canvas.getContext( '2d' );
 
             document.body.appendChild( canvas );
 

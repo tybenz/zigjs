@@ -38,18 +38,28 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
         },
 
         update: function () {
+            var oldX = this.x,
+                oldY = this.y;
 
             if ( KeyHandler.keysDown[ 'D' ] ) {
-                this.changeState( 'walking-right' );
+                if ( this.activeState != 'walking-right' ) {
+                    this.changeState( 'walking-right' );
+                }
                 this.x += 2.5;
             } else if ( KeyHandler.keysDown[ 'A' ] ) {
-                this.changeState( 'walking-left' );
+                if ( this.activeState != 'walking-left' ) {
+                    this.changeState( 'walking-left' );
+                }
                 this.x -= 2.5;
             } else if ( KeyHandler.keysDown[ 'S' ] ) {
-                this.changeState( 'walking-down' );
+                if ( this.activeState != 'walking-down' ) {
+                    this.changeState( 'walking-down' );
+                }
                 this.y += 2.5;
             } else if ( KeyHandler.keysDown[ 'W' ] ) {
-                this.changeState( 'walking-up' );
+                if ( this.activeState != 'walking-up' ) {
+                    this.changeState( 'walking-up' );
+                }
                 this.y -= 2.5;
             } else {
                 switch ( this.activeState ) {
@@ -61,6 +71,10 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
                         break;
                     default: break;
                 }
+            }
+
+            if ( this.x != oldX || this.y != oldY ) {
+                this.trigger( 'invalidate-rect', { x: this.x, y: this.y, width: this.width, height: this.height } );
             }
         }
     });
