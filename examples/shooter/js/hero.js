@@ -49,7 +49,7 @@ function ( Entity, Vector, VectorUtils, Keys, Mouse, Bullet, Bang ) {
         },
 
         update: function ( timeDiff ) {
-            var angle = Mouse.angle( this.pos.x, this.pos.y ),
+            var angle = Mouse.angle( this.pos.x + ( this.width / 2 ), this.pos.y + ( this.height / 2 ) ),
                 changed = false;
 
             if ( angle >= -45 && angle < 45 ) {

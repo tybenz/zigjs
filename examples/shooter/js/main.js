@@ -26,8 +26,9 @@ require([
     'game-manager',
     'hero',
     'wall',
-    'floor'
-], function ( Entity, Level, Animation, ImageLoader, Sprite, spriteList, GameManager, Hero, Wall, Floor ) {
+    'floor',
+    'crosshair'
+], function ( Entity, Level, Animation, ImageLoader, Sprite, spriteList, GameManager, Hero, Wall, Floor, Crosshair ) {
     var MyGame = GameManager.extend({
         gameReady: function ( game, animations ) {
             var canvas = document.createElement( 'canvas' ),
@@ -53,12 +54,15 @@ require([
             canvas.width = 768;
             canvas.height = 512;
 
-            var ctx = canvas.getContext( '2d' );
+            var ctx = canvas.getContext( '2d' ),
+                crosshair = new Crosshair( 0, 0, animations );
 
             document.body.appendChild( canvas );
 
             game.setContext( ctx );
             game.loadLevel( level, animations );
+            game.currentLevel.addEntity( crosshair );
+
             game.start();
         }
     });

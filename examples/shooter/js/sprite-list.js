@@ -363,5 +363,10 @@ define( 'sprite-list', {
         name: 'weapons-items.png',
         delta: 5000,
         sprites: [ [ 44, 104, 12, 12 ] ]
+    },
+    'crosshair': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 384, 36, 32, 32 ] ]
     }
 });
