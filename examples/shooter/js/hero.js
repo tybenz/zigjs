@@ -1,6 +1,10 @@
 define( 'hero', [ 'entity', 'sprite-list', 'animation', 'key-handler' ],
 function ( Entity, SpriteList, Animation, KeyHandler ) {
-    return Entity.extend({
+    var Hero = Entity.extend({
+        type: 'Hero',
+
+        drawLayer: 1,
+
         defaultState: 'walking-right',
 
         init: function ( x , y, animations ) {
@@ -81,4 +85,8 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
             return false;
         }
     });
+
+    Entity.Hero = Hero;
+
+    return Hero;
 });

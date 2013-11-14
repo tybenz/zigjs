@@ -343,5 +343,10 @@ define( 'sprite-list', {
         name: 'floor.png',
         delta: 5000,
         sprites: [ [ 32, 0, 32, 32 ] ]
+    },
+    'floor-stairs-right': {
+        name: 'special-floor.png',
+        delta: 5000,
+        sprites: [ [ 64, 0, 32, 32 ] ]
     }
 });

@@ -5,6 +5,7 @@ require.config({
         'vector': '../../../lib/vector',
         'sprite': '../../../lib/sprite',
         'entity': '../../../lib/entity',
+        'level': '../../../lib/level',
         'animation': '../../../lib/animation',
         'image-loader': '../../../lib/image-loader',
         'game-manager': '../../../lib/game-manager',
@@ -15,6 +16,7 @@ require.config({
 
 require([
     'entity',
+    'level',
     'animation',
     'image-loader',
     'sprite',
@@ -22,10 +24,20 @@ require([
     'game-manager',
     'hero',
     'land'
-], function ( Entity, Animation, ImageLoader, Sprite, spriteList, GameManager, Hero, Land ) {
+], function ( Entity, Level, Animation, ImageLoader, Sprite, spriteList, GameManager, Hero, Land ) {
     var MyGame = GameManager.extend({
         gameReady: function ( game, animations ) {
-            var canvas = document.createElement( 'canvas' );
+            var canvas = document.createElement( 'canvas' ),
+                level = new Level([
+                    'blank*16',
+                    'blank*1|land{wall-white-corner-tl}*1|land{wall-white-horizontal-normal}*12|land{wall-white-corner-tr}*1|blank*1',
+                    'blank*1|land{wall-white-vertical-normal}*1|hero,land{floor-lightblue}*1|land{floor-lightblue}*11|land{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|land{wall-white-vertical-normal}*1|land{floor-lightblue}*12|land{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|land{wall-white-vertical-normal}*1|land{floor-lightblue}*11|land{floor-lightblue},land{floor-stairs-right}*1|land{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|land{wall-white-vertical-normal}*1|land{floor-lightblue}*12|land{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|land{wall-white-corner-bl}*1|land{wall-white-horizontal-normal}*12|land{wall-white-corner-br}*1|blank*1',
+                    'blank*16'
+                ]);
 
             var entities = [
                 new Land( 32, 32, animations, 'wall-white-corner-tl' ),
@@ -57,15 +69,15 @@ require([
                 new Hero( 64, 64, animations )
             ];
 
-            canvas.width = 1000;
-            canvas.height = 512;
+            canvas.width = 512;
+            canvas.height = 256;
 
             var ctx = canvas.getContext( '2d' );
 
             document.body.appendChild( canvas );
 
             game.setContext( ctx );
-            game.loadLevel( { entities: entities } );
+            game.loadLevel( level, animations );
             game.start();
         }
     });

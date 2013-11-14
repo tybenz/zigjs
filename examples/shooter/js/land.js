@@ -1,6 +1,6 @@
 define( 'land', [ 'entity', 'sprite-list', 'animation', 'key-handler' ],
 function ( Entity, SpriteList, Animation, KeyHandler ) {
-    return Entity.extend({
+    var Land = Entity.extend({
         defaultState: 'still',
 
         states: {
@@ -13,7 +13,11 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
             this.width = 32;
             this.height = 32;
 
-            this.animation = animations[ sprite ];
+            this.animation = animations[ sprite ] || animations[ 'wall-white-vertical-normal' ];
         }
     });
+
+    Entity.Land = Land;
+
+    return Land;
 });
