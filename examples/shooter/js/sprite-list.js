@@ -349,15 +349,35 @@ define( 'sprite-list', {
         delta: 5000,
         sprites: [ [ 64, 0, 32, 32 ] ]
     },
-    'bullet-horizontal-red': {
+    'bullet-red-horizontal': {
         name: 'weapons-items.png',
         delta: 5000,
         sprites: [ [ 12, 108, 8, 8 ] ]
     },
-    'bullet-vertical-red': {
+    'bullet-red-vertical': {
         name: 'weapons-items.png',
         delta: 5000,
         sprites: [ [ 48, 76, 8, 8 ] ]
+    },
+    'bullet-red-ne': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 76, 76, 8, 8 ] ]
+    },
+    'bullet-red-se': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 76, 140, 8, 8 ] ]
+    },
+    'bullet-red-sw': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 12, 140, 8, 8 ] ]
+    },
+    'bullet-red-nw': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 12, 76, 8, 8 ] ]
     },
     'bang-red': {
         name: 'weapons-items.png',

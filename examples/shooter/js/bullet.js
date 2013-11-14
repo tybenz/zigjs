@@ -9,12 +9,12 @@ function ( Entity ) {
 
         init: function ( x, y, animations, sprite ) {
             this.states = {
-                'horizontal': { animation: animations[ 'bullet-horizontal-red' ] },
-                'vertical': { animation: animations[ 'bullet-vertical-red' ] },
-                'ne': { animation: animations[ 'bullet-ne-red' ] },
-                'se': { animation: animations[ 'bullet-se-red' ] },
-                'sw': { animation: animations[ 'bullet-sw-red' ] },
-                'nw': { animation: animations[ 'bullet-nw-red' ] }
+                'horizontal': { animation: animations[ 'bullet-red-horizontal' ] },
+                'vertical': { animation: animations[ 'bullet-red-veritcal' ] },
+                'ne': { animation: animations[ 'bullet-red-ne' ] },
+                'se': { animation: animations[ 'bullet-red-se' ] },
+                'sw': { animation: animations[ 'bullet-red-sw' ] },
+                'nw': { animation: animations[ 'bullet-red-nw' ] }
             };
 
             this._super( x, y, animations, sprite );

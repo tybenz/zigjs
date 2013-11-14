@@ -9,6 +9,8 @@ function ( Entity, Vector, VectorUtils, Keys, Mouse, Bullet, Bang ) {
 
         walkingVelocity: VectorUtils.mph2ppf( 0.08 ),
 
+        bulletVelocity: VectorUtils.mph2ppf( 0.2 ),
+
         init: function ( x , y, animations ) {
             this.initStates( animations );
 
@@ -110,45 +112,71 @@ function ( Entity, Vector, VectorUtils, Keys, Mouse, Bullet, Bang ) {
             return changed;
         },
 
+        setCrosshair: function ( crosshair ) {
+            this.crosshair = crosshair;
+        },
+
         fire: function () {
-            var x, y,
+            var x = this.crosshair.pos.x + 16,
+                y = this.crosshair.pos.y + 16,
+                center = new Vector( this.pos.x + this.width / 2, this.pos.y + this.height / 2 ),
+                crosshairPos = new Vector( x, y ),
+                angle = VectorUtils.angle( center, crosshairPos ),
                 bulletType,
-                xVelocity = 0,
-                yVelocity = 0;
+                velocity;
+
+            velocity = VectorUtils.angleMag2Vector( angle, this.bulletVelocity );
+
+            if ( angle >= -22.5 && angle < 22.5 ) {
+                bulletType = 'bullet-red-horizontal';
+            }
+            if ( angle >= 22.5 && angle < 67.5 ) {
+                bulletType = 'bullet-red-se';
+            }
+            if ( angle >= 67.5 && angle < 112.5 ) {
+                bulletType = 'bullet-red-vertical';
+            }
+            if ( angle >= 112.5 && angle < 157.5 ) {
+                bulletType = 'bullet-red-sw';
+            }
+            if ( angle >= 157.5 || angle < -157.5 ) {
+                bulletType = 'bullet-red-horizontal';
+            }
+            if ( angle >= -157.5 && angle < -112.5 ) {
+                bulletType = 'bullet-red-nw';
+            }
+            if ( angle >= -112.5 && angle < -67.5 ) {
+                bulletType = 'bullet-red-vertical';
+            }
+            if ( angle >= -67.5 && angle < -22.5 ) {
+                bulletType = 'bullet-red-ne';
+            }
+            console.log(angle, bulletType);
 
             if ( this.activeState.indexOf( 'right' ) != -1 ) {
                 x = this.pos.x + this.width;
                 y = this.pos.y + 12;
-                bulletType = 'bullet-horizontal-red';
-                xVelocity = 0.6;
             }
 
             if ( this.activeState.indexOf( 'left' ) != -1 ) {
                 x = this.pos.x - 8;
                 y = this.pos.y + 12;
-                bulletType = 'bullet-horizontal-red';
-                xVelocity = -0.6;
             }
 
             if ( this.activeState.indexOf( 'up' ) != -1 ) {
                 x = this.pos.x + 4;
                 y = this.pos.y + 4;
-                bulletType = 'bullet-vertical-red';
-                yVelocity = -0.6;
             }
 
             if ( this.activeState.indexOf( 'down' ) != -1 ) {
                 x = this.pos.x + this.width - 8;
                 y = this.pos.y + 20;
-                bulletType = 'bullet-vertical-red';
-                yVelocity = 0.6;
             }
 
             // var bang = new Bang( x - 4, y - 4, this.allAnimations, undefined, this );
             var bullet = new Bullet( x, y, this.allAnimations, bulletType );
 
-            bullet.velocity.x = xVelocity;
-            bullet.velocity.y = yVelocity;
+            bullet.velocity = velocity;
 
             this.trigger( 'entity-added', bullet );
             // this.trigger( 'entity-added', bang );

@@ -61,6 +61,18 @@ require([
 
             game.setContext( ctx );
             game.loadLevel( level, animations );
+
+            var entities = game.currentLevel.entities,
+                hero;
+
+            for ( var i = 0, len = entities.length; i < len; i++ ) {
+                if ( entities[i].type == 'Hero' ) {
+                    hero = entities[i];
+                    break;
+                }
+            }
+            hero.setCrosshair( crosshair );
+
             game.currentLevel.addEntity( crosshair );
 
             game.start();
