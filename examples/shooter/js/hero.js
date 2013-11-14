@@ -1,5 +1,5 @@
-define( 'hero', [ 'entity', 'sprite-list', 'animation', 'key-handler' ],
-function ( Entity, SpriteList, Animation, KeyHandler ) {
+define( 'hero', [ 'entity', 'key-handler', 'mouse-handler' ],
+function ( Entity, KeyHandler, MouseHandler ) {
     var Hero = Entity.extend({
         type: 'Hero',
 
@@ -46,28 +46,40 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
         },
 
         update: function () {
+            var angle = MouseHandler.angle( this.x, this.y ),
+                changed = false;
+
+            if ( angle >= -45 && angle < 45 ) {
+                this.changeState( this.activeState.replace( /down|up|left|right/, 'right' ) );
+                changed = true;
+            }
+            if ( angle >= 45 && angle < 135 ) {
+                this.changeState( this.activeState.replace( /down|up|left|right/, 'down' ) );
+                changed = true;
+            }
+            if ( angle >= 135 || angle < -135 ) {
+                this.changeState( this.activeState.replace( /down|up|left|right/, 'left' ) );
+                changed = true;
+            }
+            if ( angle >= -135 && angle < -45 ) {
+                this.changeState( this.activeState.replace( /down|up|left|right/, 'up' ) );
+                changed = true;
+            }
+
             if ( KeyHandler.keysDown[ 'S' ] ) {
-                if ( this.activeState != 'walking-down' ) {
-                    this.changeState( 'walking-down' );
-                }
+                this.changeState( this.activeState.replace( /standing/, 'walking' ) );
                 this.y += 3;
             }
             if ( KeyHandler.keysDown[ 'W' ] ) {
-                if ( this.activeState != 'walking-up' ) {
-                    this.changeState( 'walking-up' );
-                }
+                this.changeState( this.activeState.replace( /standing/, 'walking' ) );
                 this.y -= 3;
             }
             if ( KeyHandler.keysDown[ 'D' ] ) {
-                if ( this.activeState != 'walking-right' ) {
-                    this.changeState( 'walking-right' );
-                }
+                this.changeState( this.activeState.replace( /standing/, 'walking' ) );
                 this.x += 3;
             }
             if ( KeyHandler.keysDown[ 'A' ] ) {
-                if ( this.activeState != 'walking-left' ) {
-                    this.changeState( 'walking-left' );
-                }
+                this.changeState( this.activeState.replace( /standing/, 'walking' ) );
                 this.x -= 3;
             }
             if ( !KeyHandler.keysDown[ 'W' ] && !KeyHandler.keysDown[ 'A' ] && !KeyHandler.keysDown[ 'S' ] && !KeyHandler.keysDown[ 'D' ] ) {
@@ -82,7 +94,12 @@ function ( Entity, SpriteList, Animation, KeyHandler ) {
                 }
             }
 
-            return false;
+            if ( MouseHandler.isDown( 'LEFT_MOUSE' ) ) {
+                console.log('FIRE');
+                MouseHandler.lock( 'LEFT_MOUSE', 500 );
+            }
+
+            return changed;
         }
     });
 
