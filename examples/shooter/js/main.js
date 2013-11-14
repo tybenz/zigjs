@@ -3,6 +3,7 @@ require.config({
     paths: {
         'class': '../../../lib/class',
         'vector': '../../../lib/vector',
+        'vector-utils': '../../../lib/vector-utils',
         'sprite': '../../../lib/sprite',
         'entity': '../../../lib/entity',
         'level': '../../../lib/level',

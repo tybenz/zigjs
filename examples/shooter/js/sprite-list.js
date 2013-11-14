@@ -348,5 +348,20 @@ define( 'sprite-list', {
         name: 'special-floor.png',
         delta: 5000,
         sprites: [ [ 64, 0, 32, 32 ] ]
+    },
+    'bullet-horizontal-red': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 12, 108, 8, 8 ] ]
+    },
+    'bullet-vertical-red': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 48, 76, 8, 8 ] ]
+    },
+    'bang-red': {
+        name: 'weapons-items.png',
+        delta: 5000,
+        sprites: [ [ 44, 104, 12, 12 ] ]
     }
 });

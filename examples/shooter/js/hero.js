@@ -1,17 +1,20 @@
-define( 'hero', [ 'entity', 'key-handler', 'mouse-handler' ],
-function ( Entity, KeyHandler, MouseHandler ) {
+define( 'hero', [ 'entity', 'vector', 'vector-utils', 'key-handler', 'mouse-handler', 'bullet', 'bang' ],
+function ( Entity, Vector, VectorUtils, Keys, Mouse, Bullet, Bang ) {
     var Hero = Entity.extend({
         type: 'Hero',
 
-        drawLayer: 1,
+        drawLayer: 2,
 
         defaultState: 'walking-right',
+
+        walkingVelocity: VectorUtils.mph2ppf( 0.08 ),
 
         init: function ( x , y, animations ) {
             this.initStates( animations );
 
             this._super( x, y, animations );
 
+            this.allAnimations = animations;
             this.width = 32;
             this.height = 32;
         },
@@ -45,8 +48,8 @@ function ( Entity, KeyHandler, MouseHandler ) {
             };
         },
 
-        update: function () {
-            var angle = MouseHandler.angle( this.x, this.y ),
+        update: function ( timeDiff ) {
+            var angle = Mouse.angle( this.pos.x, this.pos.y ),
                 changed = false;
 
             if ( angle >= -45 && angle < 45 ) {
@@ -66,23 +69,27 @@ function ( Entity, KeyHandler, MouseHandler ) {
                 changed = true;
             }
 
-            if ( KeyHandler.keysDown[ 'S' ] ) {
+            if ( Keys.isDown( 'S' ) ) {
                 this.changeState( this.activeState.replace( /standing/, 'walking' ) );
-                this.y += 3;
-            }
-            if ( KeyHandler.keysDown[ 'W' ] ) {
+                this.velocity.y = this.walkingVelocity;
+            } else if ( Keys.isDown( 'W' ) ) {
                 this.changeState( this.activeState.replace( /standing/, 'walking' ) );
-                this.y -= 3;
+                this.velocity.y = 0 - this.walkingVelocity;
+            } else {
+                this.velocity.y = 0;
             }
-            if ( KeyHandler.keysDown[ 'D' ] ) {
+
+            if ( Keys.isDown( 'D' ) ) {
                 this.changeState( this.activeState.replace( /standing/, 'walking' ) );
-                this.x += 3;
-            }
-            if ( KeyHandler.keysDown[ 'A' ] ) {
+                this.velocity.x = this.walkingVelocity;
+            } else if ( Keys.isDown( 'A' ) ) {
                 this.changeState( this.activeState.replace( /standing/, 'walking' ) );
-                this.x -= 3;
+                this.velocity.x = 0 - this.walkingVelocity;
+            } else {
+                this.velocity.x = 0;
             }
-            if ( !KeyHandler.keysDown[ 'W' ] && !KeyHandler.keysDown[ 'A' ] && !KeyHandler.keysDown[ 'S' ] && !KeyHandler.keysDown[ 'D' ] ) {
+
+            if ( !Keys.isDown( 'W' ) && !Keys.isDown( 'A' ) && !Keys.isDown( 'S' ) && !Keys.isDown( 'D' ) ) {
                 switch ( this.activeState ) {
                     case 'walking-up':
                     case 'walking-left':
@@ -94,12 +101,57 @@ function ( Entity, KeyHandler, MouseHandler ) {
                 }
             }
 
-            if ( MouseHandler.isDown( 'LEFT_MOUSE' ) ) {
+            if ( Mouse.isDown( 'LEFT_MOUSE' ) ) {
                 console.log('FIRE');
-                MouseHandler.lock( 'LEFT_MOUSE', 500 );
+                Mouse.lock( 'LEFT_MOUSE', 500 );
+                this.fire();
             }
 
             return changed;
+        },
+
+        fire: function () {
+            var x, y,
+                bulletType,
+                xVelocity = 0,
+                yVelocity = 0;
+
+            if ( this.activeState.indexOf( 'right' ) != -1 ) {
+                x = this.pos.x + this.width;
+                y = this.pos.y + 12;
+                bulletType = 'bullet-horizontal-red';
+                xVelocity = 0.6;
+            }
+
+            if ( this.activeState.indexOf( 'left' ) != -1 ) {
+                x = this.pos.x - 8;
+                y = this.pos.y + 12;
+                bulletType = 'bullet-horizontal-red';
+                xVelocity = -0.6;
+            }
+
+            if ( this.activeState.indexOf( 'up' ) != -1 ) {
+                x = this.pos.x + 4;
+                y = this.pos.y + 4;
+                bulletType = 'bullet-vertical-red';
+                yVelocity = -0.6;
+            }
+
+            if ( this.activeState.indexOf( 'down' ) != -1 ) {
+                x = this.pos.x + this.width - 8;
+                y = this.pos.y + 20;
+                bulletType = 'bullet-vertical-red';
+                yVelocity = 0.6;
+            }
+
+            // var bang = new Bang( x - 4, y - 4, this.allAnimations, undefined, this );
+            var bullet = new Bullet( x, y, this.allAnimations, bulletType );
+
+            bullet.velocity.x = xVelocity;
+            bullet.velocity.y = yVelocity;
+
+            this.trigger( 'entity-added', bullet );
+            // this.trigger( 'entity-added', bang );
         }
     });
 

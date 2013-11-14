@@ -1,5 +1,5 @@
-define( 'wall', [ 'entity', 'sprite-list', 'animation', 'key-handler' ],
-function ( Entity, SpriteList, Animation, KeyHandler ) {
+define( 'wall', [ 'entity' ],
+function ( Entity ) {
     var Wall = Entity.extend({
         defaultState: 'still',
 
