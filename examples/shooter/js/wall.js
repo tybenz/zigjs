@@ -14,6 +14,12 @@ function ( Entity ) {
 
             this.width = 32;
             this.height = 32;
+        },
+
+        collideWith: function ( entity, collisions ) {
+            if ( entity.type == 'Bullet' ) {
+                this.trigger( 'destroy-entity', this );
+            }
         }
     });
 
