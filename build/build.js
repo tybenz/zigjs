@@ -1,6 +1,6 @@
 ({
   baseUrl: '../lib',
- 
+
   out: '../zig.min.js',
   optimize: 'uglify2',
  
@@ -10,6 +10,7 @@
     startFile: 'start.frag',
     endFile: 'end.frag'
   },
+  preserveLicenseComments: false,
 
   paths: {
     'jquery': '../bower_components/jquery/jquery'
