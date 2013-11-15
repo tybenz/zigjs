@@ -12,6 +12,7 @@ require.config({
         'game-manager': '../../../lib/game-manager',
         'key-handler': '../../../lib/key-handler',
         'mouse-handler': '../../../lib/mouse-handler',
+        'collider': '../../../lib/collider',
         'jquery': '../../../bower_components/jquery/jquery'
     }
 });
@@ -35,18 +36,18 @@ require([
                 level = new Level([
                     'blank*16',
                     'blank*1|wall{wall-white-corner-tl}*1|wall{wall-white-horizontal-normal}*20|wall{wall-white-corner-tr}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|hero,floor{floor-lightblue}*1|floor{floor-lightblue}*19|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*19|floor{floor-lightblue},floor{floor-stairs-right}*1|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
-                    'blank*1|wall{wall-white-vertical-normal}*1|floor{floor-lightblue}*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|hero,floor{floor-lightblue}(20x12)*1|blank*19|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
+                    'blank*1|wall{wall-white-vertical-normal}*1|blank*20|wall{wall-white-vertical-normal}*1|blank*1',
                     'blank*1|wall{wall-white-corner-bl}*1|wall{wall-white-horizontal-normal}*20|wall{wall-white-corner-br}*1|blank*1',
                     'blank*16'
                 ]);

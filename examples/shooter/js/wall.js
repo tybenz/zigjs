@@ -1,6 +1,8 @@
 define( 'wall', [ 'entity' ],
 function ( Entity ) {
     var Wall = Entity.extend({
+        type: 'Wall',
+
         defaultState: 'still',
 
         states: {

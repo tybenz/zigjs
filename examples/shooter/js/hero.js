@@ -180,6 +180,31 @@ function ( Entity, Vector, VectorUtils, Keys, Mouse, Bullet, Bang ) {
 
             this.trigger( 'entity-added', bullet );
             // this.trigger( 'entity-added', bang );
+        },
+
+        collideWith: function ( entity, collisions ) {
+            this._super( entity, collisions );
+
+            var x = this.pos.x,
+                y = this.pos.y,
+                entX = entity.pos.x,
+                entY = entity.pos.y,
+                xVel = this.velocity.x,
+                yVel = this.velocity.y;
+
+            if ( entity.type == 'Wall' ) {
+                if ( xVel > 0 && x < entX ) {
+                    this.pos.x = entity.pos.x - this.width;
+                } else if ( xVel < 0 && x > entX ) {
+                    this.pos.x = entity.pos.x + entity.width;
+                }
+
+                if ( yVel > 0 && y < entY ) {
+                    this.pos.y = entity.pos.y - this.height;
+                } else if ( yVel < 0 && y > entY ) {
+                    this.pos.y = entity.pos.y + entity.height;
+                }
+            }
         }
     });
 
