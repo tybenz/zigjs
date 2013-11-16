@@ -13,27 +13,23 @@ require.config({
         'key-handler': '../../../src/key-handler',
         'mouse-handler': '../../../src/mouse-handler',
         'collider': '../../../src/collider',
+        'zig': '../../../src/zig',
         'jquery': '../../../bower_components/jquery/jquery'
     }
 });
 
 require([
-    'entity',
-    'level',
-    'animation',
-    'image-loader',
-    'sprite',
+    'zig',
     'sprite-list',
-    'game-manager',
+    'crosshair',
     'hero',
     'wall',
-    'floor',
-    'crosshair'
-], function ( Entity, Level, Animation, ImageLoader, Sprite, spriteList, GameManager, Hero, Wall, Floor, Crosshair ) {
-    var MyGame = GameManager.extend({
+    'floor'
+], function ( Zig, SpriteList, Crosshair ) {
+    var MyGame = Zig.GameManager.extend({
         gameReady: function ( game, animations ) {
             var canvas = document.createElement( 'canvas' ),
-                level = new Level([
+                level = new Zig.Level([
                     'blank*16',
                     'blank*1|wall{wall-white-corner-tl}*1|wall{wall-white-horizontal-normal}*20|wall{wall-white-corner-tr}*1|blank*1',
                     'blank*1|wall{wall-white-vertical-normal}*1|hero,floor{floor-lightblue}(20x12)*1|blank*19|wall{wall-white-vertical-normal}*1|blank*1',
@@ -90,5 +86,5 @@ require([
         'sprites/special-floor.png',
         'sprites/walls.png',
         'sprites/weapons-items.png'
-    ], spriteList );
+    ], SpriteList );
 });
