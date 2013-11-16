@@ -10,6 +10,7 @@
     startFile: 'start.frag',
     endFile: 'end.frag'
   },
+  // Remove license comments for almond, jquery, etc
   preserveLicenseComments: false,
 
   paths: {
