@@ -1,5 +1,5 @@
 ({
-  baseUrl: '../lib',
+  baseUrl: '../src',
 
   out: '../zig.min.js',
   optimize: 'uglify2',

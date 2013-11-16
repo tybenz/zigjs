@@ -1,14 +1,14 @@
 require.config({
     urlArgs: "bust=" + Date.now(),
     paths: {
-        'class': '../../../lib/class',
-        'vector': '../../../lib/vector',
-        'vector-utils': '../../../lib/vector-utils',
-        'sprite': '../../../lib/sprite',
-        'entity': '../../../lib/entity',
-        'animation': '../../../lib/animation',
-        'image-loader': '../../../lib/image-loader',
-        'game-manager': '../../../lib/game-manager',
+        'class': '../../../src/class',
+        'vector': '../../../src/vector',
+        'vector-utils': '../../../src/vector-utils',
+        'sprite': '../../../src/sprite',
+        'entity': '../../../src/entity',
+        'animation': '../../../src/animation',
+        'image-loader': '../../../src/image-loader',
+        'game-manager': '../../../src/game-manager',
         'jquery': '../../../bower_components/jquery/jquery'
     }
 });

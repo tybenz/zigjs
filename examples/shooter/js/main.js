@@ -1,18 +1,18 @@
 require.config({
     urlArgs: "bust=" + Date.now(),
     paths: {
-        'class': '../../../lib/class',
-        'vector': '../../../lib/vector',
-        'vector-utils': '../../../lib/vector-utils',
-        'sprite': '../../../lib/sprite',
-        'entity': '../../../lib/entity',
-        'level': '../../../lib/level',
-        'animation': '../../../lib/animation',
-        'image-loader': '../../../lib/image-loader',
-        'game-manager': '../../../lib/game-manager',
-        'key-handler': '../../../lib/key-handler',
-        'mouse-handler': '../../../lib/mouse-handler',
-        'collider': '../../../lib/collider',
+        'class': '../../../src/class',
+        'vector': '../../../src/vector',
+        'vector-utils': '../../../src/vector-utils',
+        'sprite': '../../../src/sprite',
+        'entity': '../../../src/entity',
+        'level': '../../../src/level',
+        'animation': '../../../src/animation',
+        'image-loader': '../../../src/image-loader',
+        'game-manager': '../../../src/game-manager',
+        'key-handler': '../../../src/key-handler',
+        'mouse-handler': '../../../src/mouse-handler',
+        'collider': '../../../src/collider',
         'jquery': '../../../bower_components/jquery/jquery'
     }
 });
